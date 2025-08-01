@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Theory: From Beginner to Expert</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a3a;
+            --bg-card: #252547;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #06d6a0;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #374151;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06d6a0 100%);
+            --gradient-card: linear-gradient(135deg, #252547 0%, #2d2d5f 100%);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Fixed Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--accent-primary);
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 4rem;
+            background: var(--gradient-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--text-secondary);
+        }
+
+        p, li {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Interactive Elements */
+        .interactive-element {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Note Circle */
+        .note-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 3rem 0;
+        }
+
+        .circle {
+            width: 320px;
+            height: 320px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            box-shadow: var(--shadow);
+        }
+
+        .note {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: var(--accent-primary);
+            color: var(--text-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .note:hover {
+            background: var(--accent-secondary);
+            transform: scale(1.15);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Piano Keys */
+        .piano-keys {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .white-key, .black-key {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .white-key {
+            width: 45px;
+            height: 160px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            color: var(--bg-primary);
+            padding-bottom: 12px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .black-key {
+            width: 28px;
+            height: 110px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0 -14px;
+            z-index: 2;
+            border-radius: 0 0 6px 6px;
+            padding-bottom: 8px;
+        }
+
+        .white-key:hover {
+            background: #e2e8f0;
+            transform: scale(1.02);
+        }
+
+        .black-key:hover {
+            background: #1f2937;
+            transform: scale(1.05);
+        }
+
+        /* Controls */
+        .chord-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        select, button {
+            padding: 0.75rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        button {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        select:hover {
+            border-color: var(--accent-primary);
+            background: var(--bg-card);
+        }
+
+        /* Display Elements */
+        .scale-display {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-tertiary);
+            margin: 1.5rem 0;
+        }
+
+        /* Grid Layouts */
+        .interval-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .interval-item {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .interval-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .interval-item h4 {
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Special Sections */
+        .rhythm-section, .progression-player, .quiz-section {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin: 1.5rem 0;
+        }
+
+        .progression-display {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-tertiary);
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .bpm-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin: 1.5rem 0;
+        }
+
+        /* Slider */
+        .tempo-slider {
+            width: 100%;
+            margin: 1.5rem 0;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-card);
+            outline: none;
+        }
+
+        .tempo-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Quiz */
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .quiz-option {
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--accent-primary);
+            background: var(--bg-secondary);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        /* Utilities */
+        .formula {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .tip::before {
+            content: "💡 ";
+            font-size: 1.25rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .nav-menu {
+                gap: 0.25rem;
+                overflow-x: auto;
+                padding: 0.5rem 0;
+            }
+            
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .circle {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .chord-controls {
+                flex-direction: column;
+            }
+            
+            .interval-chart {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🎵 Music Theory</div>
+            <div class="nav-menu">
+                <a href="#introduction" class="nav-link">Introduction</a>
+                <a href="#fundamentals" class="nav-link">Fundamentals</a>
+                <a href="#intervals" class="nav-link">Intervals</a>
+                <a href="#scales" class="nav-link">Scales</a>
+                <a href="#chords" class="nav-link">Chords</a>
+                <a href="#rhythm" class="nav-link">Rhythm</a>
+                <a href="#quiz" class="nav-link">Quiz</a>
+            </div>
+            </div>
+        </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>🎵 Music Theory: From Beginner to Expert</h1>
+            <p>An Interactive Guide to Understanding Music - Learn theory through hands-on exploration and interactive tools</p>
+        </div>
+
+        <main>
+            <section id="introduction">
+                <h2>🌟 Introduction</h2>
+                <p><strong>Welcome to your musical journey!</strong> Music theory is the language that helps us understand how music works. Far from being a dry academic subject, it's a powerful tool that will enhance your musical creativity and expression.</p>
+                
+                <div class="tip">
+                    <strong>Music as a Language:</strong> Think of music theory like grammar in language. You don't need to know grammar to speak, but understanding it helps you communicate more effectively and expressively.
+                </div>
+
+                <h3>Why Learn Music Theory?</h3>
+                <ul>
+                    <li><strong>Better Communication:</strong> Speak the same language as other musicians</li>
+                    <li><strong>Enhanced Creativity:</strong> Understand why certain combinations sound good</li>
+                    <li><strong>Faster Learning:</strong> Recognize patterns and structures in music</li>
+                    <li><strong>Improved Improvisation:</strong> Know what notes will work in any situation</li>
+                </ul>
+
+                <h3>How to Use This App</h3>
+                <p>This interactive guide is organized from basic to advanced concepts. Each section builds on the previous ones, so take your time and practice the interactive elements as you go!</p>
+            </section>
+
+            <section id="fundamentals">
+                <h2>🎼 Music Theory Fundamentals</h2>
+                
+                <h3>What is Sound?</h3>
+                <p>Sound is created by vibrations that travel through air as pressure waves. In music, we're interested in:</p>
+                <ul>
+                    <li><strong>Pitch:</strong> How high or low a sound is (frequency)</li>
+                    <li><strong>Note:</strong> A named pitch with specific duration and quality</li>
+                    <li><strong>Timbre:</strong> The quality or "color" of a sound</li>
+                    <li><strong>Tone:</strong> Often used interchangeably with timbre</li>
+                </ul>
+
+                <h3>The 12 Notes of Western Music</h3>
+                <div class="interactive-element">
+                    <p>There are only 12 different notes in Western music, which repeat in higher and lower octaves:</p>
+                    <div class="note-circle">
+                        <div class="circle" id="noteCircle">
+                            <!-- Notes will be positioned around the circle -->
+                        </div>
+                    </div>
+                    <p><em>Click on any note to hear its name and see its relationships!</em></p>
+                </div>
+
+                <div class="piano-keys" id="pianoKeys">
+                    <div class="white-key" data-note="C">C</div>
+                    <div class="black-key" data-note="C#">C#</div>
+                    <div class="white-key" data-note="D">D</div>
+                    <div class="black-key" data-note="D#">D#</div>
+                    <div class="white-key" data-note="E">E</div>
+                    <div class="white-key" data-note="F">F</div>
+                    <div class="black-key" data-note="F#">F#</div>
+                    <div class="white-key" data-note="G">G</div>
+                    <div class="black-key" data-note="G#">G#</div>
+                    <div class="white-key" data-note="A">A</div>
+                    <div class="black-key" data-note="A#">A#</div>
+                    <div class="white-key" data-note="B">B</div>
+                </div>
+
+                <div class="tip">
+                    <strong>Remember:</strong> The distance between any two adjacent notes (like C to C# or E to F) is called a <strong>half-step</strong> or <strong>semitone</strong>. Two half-steps make a <strong>whole step</strong> or <strong>tone</strong>.
+                </div>
+
+                <h3>Octaves and Pitch</h3>
+                <p>An <strong>octave</strong> is the distance between one note and the same note in the next higher or lower register. The higher note has exactly twice the frequency of the lower note.</p>
+                
+                <div class="formula">
+                    Standard Pitch: A4 = 440 Hz<br>
+                    A3 = 220 Hz (one octave lower)<br>
+                    A5 = 880 Hz (one octave higher)
+                </div>
+            </section>
+
+            <section id="intervals">
+                <h2>🎯 Master the Intervals</h2>
+                
+                <h3>What is an Interval?</h3>
+                <p>An interval is the distance between two notes. Each interval has a unique sound and name. Understanding intervals is crucial because they form the building blocks of chords and scales.</p>
+
+                <div class="interactive-element">
+                    <h4>Interval Calculator</h4>
+                    <div class="chord-controls">
+                        <select id="rootNote">
+                            <option value="C">C</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                            <option value="D#">D#</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="F#">F#</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="A">A</option>
+                            <option value="A#">A#</option>
+                            <option value="B">B</option>
+                        </select>
+                        <select id="targetNote">
+                            <option value="C">C</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                            <option value="D#">D#</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="F#">F#</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="A">A</option>
+                            <option value="A#">A#</option>
+                            <option value="B">B</option>
+                        </select>
+                        <button onclick="calculateInterval()">Calculate Interval</button>
+                    </div>
+                    <div id="intervalResult" class="scale-display"></div>
+                </div>
+
+                <h3>The Basic Intervals</h3>
+                <div class="interval-chart">
+                    <div class="interval-item">
+                        <h4>Perfect Unison</h4>
+                        <p>Same note (0 semitones)</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Minor 2nd</h4>
+                        <p>1 semitone</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Major 2nd</h4>
+                        <p>2 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Minor 3rd</h4>
+                        <p>3 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Major 3rd</h4>
+                        <p>4 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Perfect 4th</h4>
+                        <p>5 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Tritone</h4>
+                        <p>6 semitones (Aug 4th/Dim 5th)</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Perfect 5th</h4>
+                        <p>7 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Minor 6th</h4>
+                        <p>8 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Major 6th</h4>
+                        <p>9 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Minor 7th</h4>
+                        <p>10 semitones</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Major 7th</h4>
+                        <p>11 semitones</p>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>Memory Tip:</strong> Perfect intervals (unison, 4th, 5th, octave) sound stable and consonant. Major and minor intervals can change quality, while perfect intervals stay the same in major and minor keys.
+                </div>
+            </section>
+
+            <section id="scales">
+                <h2>🎵 Scales and Modes</h2>
+                
+                <h3>What is a Scale?</h3>
+                <p>A scale is a collection of notes organized by pitch. It's like a musical alphabet that provides the raw material for melodies and harmonies.</p>
+
+                <div class="interactive-element">
+                    <h4>Scale Builder</h4>
+                    <div class="chord-controls">
+                        <select id="scaleRoot">
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                        <select id="scaleType">
+                            <option value="major">Major</option>
+                            <option value="minor">Natural Minor</option>
+                            <option value="dorian">Dorian</option>
+                            <option value="phrygian">Phrygian</option>
+                            <option value="lydian">Lydian</option>
+                            <option value="mixolydian">Mixolydian</option>
+                            <option value="locrian">Locrian</option>
+                            <option value="pentatonic">Pentatonic</option>
+                        </select>
+                        <button onclick="buildScale()">Build Scale</button>
+                    </div>
+                    <div id="scaleResult" class="scale-display"></div>
+                </div>
+
+                <h3>The Major Scale - Foundation of Western Music</h3>
+                <p>The major scale is the most important scale to learn. All other scales are often described in relation to it.</p>
+                
+                <div class="formula">
+                    Major Scale Formula: W-W-H-W-W-W-H<br>
+                    (W = Whole step, H = Half step)<br><br>
+                    C Major: C-D-E-F-G-A-B-C<br>
+                    Intervals: R-M2-M3-P4-P5-M6-M7-R
+                </div>
+
+                <h3>The Natural Minor Scale</h3>
+                <p>The natural minor scale has a darker, more melancholic sound compared to the major scale.</p>
+                
+                <div class="formula">
+                    Natural Minor Formula: W-H-W-W-H-W-W<br><br>
+                    A Minor: A-B-C-D-E-F-G-A<br>
+                    Intervals: R-M2-m3-P4-P5-m6-m7-R
+                </div>
+
+                <h3>The Seven Diatonic Modes</h3>
+                <p>Modes are different ways of playing the same set of notes, starting from different points:</p>
+                
+                <div class="interval-chart">
+                    <div class="interval-item">
+                        <h4>Ionian (Major)</h4>
+                        <p>Happy, bright sound</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Dorian</h4>
+                        <p>Minor with raised 6th</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Phrygian</h4>
+                        <p>Dark, exotic sound</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Lydian</h4>
+                        <p>Major with raised 4th</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Mixolydian</h4>
+                        <p>Major with lowered 7th</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Aeolian (Natural Minor)</h4>
+                        <p>Sad, melancholic sound</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Locrian</h4>
+                        <p>Unstable, rarely used</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="chords">
+                <h2>🎸 Master the Chords</h2>
+                
+                <h3>What is a Chord?</h3>
+                <p>A chord is three or more notes played simultaneously. Chords provide the harmonic foundation of music.</p>
+
+                <div class="interactive-element">
+                    <h4>Chord Builder</h4>
+                    <div class="chord-controls">
+                        <select id="chordRoot">
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                        <select id="chordQuality">
+                            <option value="major">Major</option>
+                            <option value="minor">Minor</option>
+                            <option value="dominant7">Dominant 7th</option>
+                            <option value="major7">Major 7th</option>
+                            <option value="minor7">Minor 7th</option>
+                            <option value="diminished">Diminished</option>
+                            <option value="augmented">Augmented</option>
+                        </select>
+                        <button onclick="buildChord()">Build Chord</button>
+                    </div>
+                    <div id="chordResult" class="scale-display"></div>
+                </div>
+
+                <h3>Basic Triad Chords</h3>
+                <div class="interval-chart">
+                    <div class="interval-item">
+                        <h4>Major Triad</h4>
+                        <p>Root + Major 3rd + Perfect 5th</p>
+                        <p>Formula: 1-3-5</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Minor Triad</h4>
+                        <p>Root + Minor 3rd + Perfect 5th</p>
+                        <p>Formula: 1-♭3-5</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Diminished Triad</h4>
+                        <p>Root + Minor 3rd + Diminished 5th</p>
+                        <p>Formula: 1-♭3-♭5</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Augmented Triad</h4>
+                        <p>Root + Major 3rd + Augmented 5th</p>
+                        <p>Formula: 1-3-#5</p>
+                    </div>
+                </div>
+
+                <h3>Seventh Chords</h3>
+                <p>Adding a seventh to a triad creates more complex, colorful harmonies:</p>
+                
+                <div class="interval-chart">
+                    <div class="interval-item">
+                        <h4>Major 7th</h4>
+                        <p>Formula: 1-3-5-7</p>
+                        <p>Dreamy, jazz sound</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Minor 7th</h4>
+                        <p>Formula: 1-♭3-5-♭7</p>
+                        <p>Smooth, mellow</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Dominant 7th</h4>
+                        <p>Formula: 1-3-5-♭7</p>
+                        <p>Blues, tension</p>
+                    </div>
+                    <div class="interval-item">
+                        <h4>Minor 7♭5</h4>
+                        <p>Formula: 1-♭3-♭5-♭7</p>
+                        <p>Jazz, sophisticated</p>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>Chord Families:</strong> There are three main chord families - Major (stable, happy), Minor (stable, sad), and Dominant (unstable, wants to resolve).
+                </div>
+            </section>
+
+            <section id="rhythm">
+                <h2>🥁 All About Rhythm</h2>
+                
+                <h3>The Importance of Rhythm</h3>
+                <p>Rhythm is the heartbeat of music. It's what makes you tap your foot, nod your head, or dance. Good rhythm can make even simple melodies sound amazing.</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Note arrays for calculations
+        const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const intervalNames = [
+            'Perfect Unison', 'Minor 2nd', 'Major 2nd', 'Minor 3rd', 'Major 3rd', 'Perfect 4th',
+            'Tritone', 'Perfect 5th', 'Minor 6th', 'Major 6th', 'Minor 7th', 'Major 7th'
+        ];
+
+        // Scale patterns (in semitones)
+        const scalePatterns = {
+            major: [0, 2, 4, 5, 7, 9, 11],
+            minor: [0, 2, 3, 5, 7, 8, 10],
+            dorian: [0, 2, 3, 5, 7, 9, 10],
+            phrygian: [0, 1, 3, 5, 7, 8, 10],
+            lydian: [0, 2, 4, 6, 7, 9, 11],
+            mixolydian: [0, 2, 4, 5, 7, 9, 10],
+            locrian: [0, 1, 3, 5, 6, 8, 10],
+            pentatonic: [0, 2, 4, 7, 9]
+        };
+
+        // Chord patterns (in semitones from root)
+        const chordPatterns = {
+            major: [0, 4, 7],
+            minor: [0, 3, 7],
+            diminished: [0, 3, 6],
+            augmented: [0, 4, 8],
+            dominant7: [0, 4, 7, 10],
+            major7: [0, 4, 7, 11],
+            minor7: [0, 3, 7, 10]
+        };
+
+        // Calculate interval between two notes
+        function calculateInterval() {
+            const rootNote = document.getElementById('rootNote').value;
+            const targetNote = document.getElementById('targetNote').value;
+            
+            const rootIndex = notes.indexOf(rootNote);
+            const targetIndex = notes.indexOf(targetNote);
+            
+            let interval = (targetIndex - rootIndex + 12) % 12;
+            const intervalName = intervalNames[interval];
+            
+            document.getElementById('intervalResult').innerHTML = 
+                `<strong>${rootNote} to ${targetNote}</strong><br>
+                 Interval: ${intervalName} (${interval} semitones)`;
+        }
+
+        // Build scale based on root and type
+        function buildScale() {
+            const root = document.getElementById('scaleRoot').value;
+            const scaleType = document.getElementById('scaleType').value;
+            
+            const rootIndex = notes.indexOf(root);
+            const pattern = scalePatterns[scaleType];
+            
+            const scaleNotes = pattern.map(interval => {
+                const noteIndex = (rootIndex + interval) % 12;
+                return notes[noteIndex];
+            });
+            
+            const scaleTypeNames = {
+                major: 'Major',
+                minor: 'Natural Minor',
+                dorian: 'Dorian',
+                phrygian: 'Phrygian',
+                lydian: 'Lydian',
+                mixolydian: 'Mixolydian',
+                locrian: 'Locrian',
+                pentatonic: 'Pentatonic'
+            };
+            
+            document.getElementById('scaleResult').innerHTML = 
+                `<strong>${root} ${scaleTypeNames[scaleType]} Scale</strong><br>
+                 Notes: ${scaleNotes.join(' - ')}<br>
+                 Pattern: ${pattern.join(' - ')} (semitones from root)`;
+        }
+
+        // Build chord based on root and quality
+        function buildChord() {
+            const root = document.getElementById('chordRoot').value;
+            const quality = document.getElementById('chordQuality').value;
+            
+            const rootIndex = notes.indexOf(root);
+            const pattern = chordPatterns[quality];
+            
+            const chordNotes = pattern.map(interval => {
+                const noteIndex = (rootIndex + interval) % 12;
+                return notes[noteIndex];
+            });
+            
+            const qualityNames = {
+                major: 'Major',
+                minor: 'Minor',
+                diminished: 'Diminished',
+                augmented: 'Augmented',
+                dominant7: 'Dominant 7th',
+                major7: 'Major 7th',
+                minor7: 'Minor 7th'
+            };
+            
+            document.getElementById('chordResult').innerHTML = 
+                `<strong>${root} ${qualityNames[quality]} Chord</strong><br>
+                 Notes: ${chordNotes.join(' - ')}<br>
+                 Pattern: ${pattern.join(' - ')} (semitones from root)`;
+        }
+
+        // Initialize the note circle with all 12 notes
+        function initializeNoteCircle() {
+            const circle = document.getElementById('noteCircle');
+            const radius = 135; // Distance from center (updated for larger circle)
+            const centerX = 160; // Center X coordinate (updated for larger circle)
+            const centerY = 160; // Center Y coordinate (updated for larger circle)
+            
+            notes.forEach((note, index) => {
+                // Calculate position around the circle (starting at top, going clockwise)
+                const angle = (index * 30 - 90) * (Math.PI / 180); // 30 degrees apart, start at top
+                const x = centerX + radius * Math.cos(angle) - 22.5; // -22.5 to center the note element (45px/2)
+                const y = centerY + radius * Math.sin(angle) - 22.5;
+                
+                // Create the note element
+                const noteElement = document.createElement('div');
+                noteElement.className = 'note';
+                noteElement.textContent = note;
+                noteElement.style.left = x + 'px';
+                noteElement.style.top = y + 'px';
+                
+                // Add click handler
+                noteElement.onclick = () => {
+                    alert(`Note: ${note}\nPosition: ${index + 1} of 12\nThis is ${index} semitones from C`);
+                };
+                
+                circle.appendChild(noteElement);
+            });
+        }
+
+        // Navigation functionality
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100; // Account for fixed navbar
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Add smooth scrolling for navigation links
+        function initializeNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Update active link on scroll
+            window.addEventListener('scroll', updateActiveNavLink);
+            updateActiveNavLink(); // Initial call
+        }
+
+        // Initialize the note circle when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeNoteCircle();
+            initializeNavigation();
+        });
+    </script>
+</body>
+</html>
